@@ -69,7 +69,7 @@
     "displayName": "Strapi AI Translator",
     "description": "AI-Powered Content Translation for Strapi"
   },
-  "name": "strapi-ai-translator",
+  "name": "strapi-ai-translator-plugin",
   "description": "AI-Powered Content Translation for Strapi",
   "license": "MIT",
   "author": "Asif Jalil (https://github.com/asif-jalil)",

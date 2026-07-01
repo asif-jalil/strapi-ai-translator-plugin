@@ -47,7 +47,7 @@ The Strapi AI Translator plugin enhances your localization workflow by utilising
 1. Install the plugin in your Strapi project:
 
 ```bash
-npm install strapi-ai-translator
+npm install strapi-ai-translator-plugin
 ```
 
 2. Configure your LLM provider via environment variables:
@@ -156,7 +156,7 @@ STRAPI_ADMIN_LLM_TRANSLATOR_LLM_MODEL=phi4-mini
 To contribute to the plugin development:
 
 1. Navigate to your Strapi project
-2. Add and link the plugin: `npx yalc add strapi-ai-translator && npx yalc link strapi-ai-translator && npm install`
+2. Add and link the plugin: `npx yalc add strapi-ai-translator-plugin && npx yalc link strapi-ai-translator-plugin && npm install`
 3. Start your Strapi project
 4. In a separate terminal, watch the plugin for changes:
    `npm run watch:link`
