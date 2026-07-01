@@ -1,5 +1,5 @@
 {
-  "version": "0.11.0",
+  "version": "1.0.0",
   "keywords": [
     "strapi",
     "plugin",
@@ -72,13 +72,13 @@
   "name": "strapi-ai-translator",
   "description": "AI-Powered Content Translation for Strapi",
   "license": "MIT",
-  "author": "grenzbotin <franziska@vulpis.dev>",
+  "author": "Asif Jalil (https://github.com/asif-jalil)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grenzbotin/strapi-llm-translator.git"
+    "url": "git+https://github.com/asif-jalil/strapi-ai-translator-plugin.git"
   },
   "bugs": {
-    "url": "https://github.com/grenzbotin/strapi-llm-translator/issues"
+    "url": "https://github.com/asif-jalil/strapi-ai-translator-plugin/issues"
   },
-  "homepage": "https://github.com/grenzbotin/strapi-llm-translator#readme"
+  "homepage": "https://github.com/asif-jalil/strapi-ai-translator-plugin#readme"
 }

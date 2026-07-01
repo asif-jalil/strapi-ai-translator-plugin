@@ -31,5 +31,8 @@
   "strapi-ai-translator.settings.fields.save_success": "Feldeinstellungen gespeichert",
   "strapi-ai-translator.settings.fields.save_error": "Speichern der Feldeinstellungen fehlgeschlagen",
   "strapi-ai-translator.settings.fields.load_error": "Laden der Feldeinstellungen fehlgeschlagen",
-  "strapi-ai-translator.settings.fields.empty": "Keine lokalisierten Inhaltstypen gefunden. Aktivieren Sie die Internationalisierung für einen Inhaltstyp mit mindestens einem übersetzbaren Feld, um ihn hier zu konfigurieren."
+  "strapi-ai-translator.settings.fields.empty": "Keine lokalisierten Inhaltstypen gefunden. Aktivieren Sie die Internationalisierung für einen Inhaltstyp mit mindestens einem übersetzbaren Feld, um ihn hier zu konfigurieren.",
+  "strapi-ai-translator.plugin.page.field_settings_cta.title": "Wählen Sie aus, welche Felder übersetzt werden",
+  "strapi-ai-translator.plugin.page.field_settings_cta.description": "Aktivieren oder deaktivieren Sie einzelne Felder pro Inhaltstyp auf der Seite „Übersetzbare Felder“.",
+  "strapi-ai-translator.plugin.page.field_settings_cta.button": "Übersetzbare Felder öffnen"
 }

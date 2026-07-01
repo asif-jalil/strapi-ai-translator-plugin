@@ -31,5 +31,8 @@
   "strapi-ai-translator.settings.fields.save_success": "Field settings saved",
   "strapi-ai-translator.settings.fields.save_error": "Failed to save field settings",
   "strapi-ai-translator.settings.fields.load_error": "Failed to load field settings",
-  "strapi-ai-translator.settings.fields.empty": "No localized content types found. Enable Internationalization on a content type with at least one translatable field to configure it here."
+  "strapi-ai-translator.settings.fields.empty": "No localized content types found. Enable Internationalization on a content type with at least one translatable field to configure it here.",
+  "strapi-ai-translator.plugin.page.field_settings_cta.title": "Choose which fields get translated",
+  "strapi-ai-translator.plugin.page.field_settings_cta.description": "Turn individual fields on or off per content type on the Translatable Fields settings page.",
+  "strapi-ai-translator.plugin.page.field_settings_cta.button": "Open Translatable Fields"
 }

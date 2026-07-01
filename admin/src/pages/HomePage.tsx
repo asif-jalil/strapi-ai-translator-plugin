@@ -9,8 +9,10 @@ import {
   TextInput,
   NumberInput,
 } from '@strapi/design-system';
+import { ListPlus } from '@strapi/icons';
 import { useIntl } from 'react-intl';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFetchClient } from '@strapi/strapi/admin';
 
 import { getTranslation } from '../utils/getTranslation';
@@ -32,6 +34,7 @@ const HomePage = () => {
   const [config, setConfig] = useState({ systemPrompt: '', temperature: 0.3 });
   const { formatMessage } = useIntl();
   const { get, post } = useFetchClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch current config
@@ -66,7 +69,7 @@ const HomePage = () => {
         background="neutral100"
       >
         <Flex data-strapi-header alignItems="center" gap={3} marginBottom={4}>
-          <PluginIcon width={42} height={42} />{' '}
+          <PluginIcon width={42} height={42} />
           <Typography variant="alpha" tag="h1" fontWeight="bold">
             {formatMessage({
               id: getTranslation('plugin.page.title'),
@@ -81,6 +84,54 @@ const HomePage = () => {
               'Configure the Strapi AI Translator plugin settings. Be aware that Base Model, API Key and LLM Base URL need to be set as environment variables.',
           })}
         </Typography>
+      </Box>
+
+      <Box paddingLeft={10} paddingRight={10} paddingTop={6}>
+        <Flex
+          background="primary100"
+          hasRadius
+          padding={4}
+          gap={4}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex gap={3} alignItems="center">
+            <Flex
+              background="primary200"
+              hasRadius
+              padding={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <ListPlus width={20} height={20} fill="primary600" />
+            </Flex>
+            <Flex direction="column" alignItems="flex-start" gap={1}>
+              <Typography variant="omega" fontWeight="bold" textColor="primary700">
+                {formatMessage({
+                  id: getTranslation('plugin.page.field_settings_cta.title'),
+                  defaultMessage: 'Choose which fields get translated',
+                })}
+              </Typography>
+              <Typography variant="pi" textColor="neutral600">
+                {formatMessage({
+                  id: getTranslation('plugin.page.field_settings_cta.description'),
+                  defaultMessage:
+                    'Turn individual fields on or off per content type on the Translatable Fields settings page.',
+                })}
+              </Typography>
+            </Flex>
+          </Flex>
+          <Button
+            variant="default"
+            startIcon={<ListPlus />}
+            onClick={() => navigate(`/settings/${PLUGIN_ID}/field-settings`)}
+          >
+            {formatMessage({
+              id: getTranslation('plugin.page.field_settings_cta.button'),
+              defaultMessage: 'Open Translatable Fields',
+            })}
+          </Button>
+        </Flex>
       </Box>
 
       <Box paddingLeft={10} paddingRight={10}>

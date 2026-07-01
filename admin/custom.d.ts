@@ -4,6 +4,14 @@ declare module '@strapi/design-system';
 declare module '@strapi/design-system/*';
 declare module '@strapi/design-system';
 
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    colors: {
+      [key: string]: string;
+    };
+  }
+}
+
 export interface LLMGenerateRequestBody {
   contentType: ContentType;
   fields: Record<string, any>;
