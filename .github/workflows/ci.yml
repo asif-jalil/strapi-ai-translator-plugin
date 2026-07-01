@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Type-check & build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # design-system RC pins a React 18 peer while devDeps use React 19,
+      # so the install needs --legacy-peer-deps (same as local).
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Type-check (server)
+        run: npx tsc -p server/tsconfig.json --noEmit
+
+      - name: Type-check (admin)
+        run: npx tsc -p admin/tsconfig.json --noEmit
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify package
+        run: npm run verify
