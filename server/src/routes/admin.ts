@@ -23,4 +23,25 @@ export default [
       policies: [],
     },
   },
+  {
+    method: 'GET',
+    path: '/field-settings',
+    handler: 'admin.getFieldSettings',
+    config: {
+      policies: [],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/field-settings',
+    handler: 'admin.setFieldSettings',
+    config: {
+      policies: [
+        {
+          name: 'admin::hasPermissions',
+          config: { actions: ['plugin::strapi-ai-translator.settings.update'] },
+        },
+      ],
+    },
+  },
 ];

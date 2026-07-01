@@ -26,6 +26,28 @@ export default {
       isReady: false,
       name: PLUGIN_ID,
     });
+
+    app.createSettingSection(
+      {
+        id: PLUGIN_ID,
+        intlLabel: { id: `${PLUGIN_ID}.settings.section`, defaultMessage: 'AI Translator' },
+      },
+      [
+        {
+          intlLabel: {
+            id: `${PLUGIN_ID}.settings.fields.link`,
+            defaultMessage: 'Translatable Fields',
+          },
+          id: 'field-settings',
+          to: `${PLUGIN_ID}/field-settings`,
+          Component: async () => {
+            const { FieldSettings } = await import('./pages/FieldSettings');
+            return FieldSettings;
+          },
+          permissions: [],
+        },
+      ]
+    );
   },
 
   bootstrap(app: any) {

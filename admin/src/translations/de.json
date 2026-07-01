@@ -22,5 +22,14 @@
   "strapi-ai-translator.plugin.page.form.save": "Änderungen speichern",
   "strapi-ai-translator.plugin.page.form.system_prompt": "System Prompt",
   "strapi-ai-translator.plugin.page.form.system_prompt_hint": "Dies ist (ein Teil) des Prompts, der verwendet wird, um das LLM anzuweisen. Er sollte klar und präzise sein.",
-  "strapi-ai-translator.plugin.page.title": "Strapi AI Translator (Übersetzungskonfiguration)"
+  "strapi-ai-translator.plugin.page.title": "Strapi AI Translator (Übersetzungskonfiguration)",
+  "strapi-ai-translator.settings.section": "AI Translator",
+  "strapi-ai-translator.settings.fields.link": "Übersetzbare Felder",
+  "strapi-ai-translator.settings.fields.title": "Übersetzbare Felder",
+  "strapi-ai-translator.settings.fields.description": "Wählen Sie aus, welche Felder der AI Translator übersetzen soll. Deaktivierte Felder werden von der Übersetzung ausgeschlossen und bleiben unverändert.",
+  "strapi-ai-translator.settings.fields.save": "Speichern",
+  "strapi-ai-translator.settings.fields.save_success": "Feldeinstellungen gespeichert",
+  "strapi-ai-translator.settings.fields.save_error": "Speichern der Feldeinstellungen fehlgeschlagen",
+  "strapi-ai-translator.settings.fields.load_error": "Laden der Feldeinstellungen fehlgeschlagen",
+  "strapi-ai-translator.settings.fields.empty": "Keine lokalisierten Inhaltstypen gefunden. Aktivieren Sie die Internationalisierung für einen Inhaltstyp mit mindestens einem übersetzbaren Feld, um ihn hier zu konfigurieren."
 }

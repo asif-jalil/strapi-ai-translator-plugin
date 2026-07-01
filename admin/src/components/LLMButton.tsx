@@ -26,6 +26,8 @@ const LLMButton = () => {
 
   const { formatMessage } = useIntl();
   const { form, contentType, components } = useContentManagerContext();
+  console.log("content type", contentType);
+  
   const { post } = useFetchClient();
 
   const { toggleNotification } = useNotification();

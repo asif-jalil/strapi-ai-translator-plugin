@@ -24,6 +24,7 @@ import {
   extractJSONObject,
   safeJSONParse,
 } from '../utils/json-utils';
+import { FIELD_KEY_SEP, getDisabledKeys, getFieldConfig } from '../utils/field-config';
 
 const llmClient = process.env.STRAPI_ADMIN_LLM_TRANSLATOR_AZURE_API_VERSION
   ? new AzureOpenAI({
@@ -64,7 +65,8 @@ const deepMerge = (target: any, source: any): any => {
 const extractTranslatableFields = (
   contentType: Record<string, any>,
   fields: Record<string, any>,
-  components: Record<string, any> = {}
+  components: Record<string, any> = {},
+  disabledKeys: Set<string> = new Set()
 ): TranslatableField[] => {
   const translatableFields: TranslatableField[] = [];
 
@@ -95,7 +97,8 @@ const extractTranslatableFields = (
     schema: Record<string, any>,
     data: Record<string, any>,
     path: string[] = [],
-    originalPath: string[] = []
+    originalPath: string[] = [],
+    configSegments: string[] = []
   ) => {
     Object.entries(schema.attributes || {}).forEach(([fieldName, fieldSchemaRaw]) => {
       const fieldSchema = fieldSchemaRaw as Record<string, any>;
@@ -104,7 +107,13 @@ const extractTranslatableFields = (
         return;
       }
 
+      const fieldKey = [...configSegments, fieldName].join(FIELD_KEY_SEP);
+
       if (isTranslatableFieldSchema(fieldSchema, value)) {
+        // Skip fields turned off on the AI Translator settings page
+        if (disabledKeys.has(fieldKey)) {
+          return;
+        }
         translatableFields.push({
           path: [...path, fieldName],
           value,
@@ -116,6 +125,7 @@ const extractTranslatableFields = (
       if (fieldSchema.type === 'component') {
         const componentSchema = components[fieldSchema.component];
         if (!componentSchema) return;
+        if (disabledKeys.has(fieldKey)) return; // whole component turned off
 
         if (fieldSchema.repeatable && Array.isArray(value)) {
           value.forEach((item: any, index: number) =>
@@ -123,13 +133,21 @@ const extractTranslatableFields = (
               componentSchema,
               item,
               [...path, fieldName, String(index)],
-              [...originalPath, fieldName, String(index)]
+              [...originalPath, fieldName, String(index)],
+              [...configSegments, fieldName]
             )
           );
         } else if (typeof value === 'object') {
-          traverse(componentSchema, value, [...path, fieldName], [...originalPath, fieldName]);
+          traverse(
+            componentSchema,
+            value,
+            [...path, fieldName],
+            [...originalPath, fieldName],
+            [...configSegments, fieldName]
+          );
         }
       } else if (fieldSchema.type === 'dynamiczone' && Array.isArray(value)) {
+        if (disabledKeys.has(fieldKey)) return; // whole dynamic zone turned off
         value.forEach((item: any, index: number) => {
           const compSchema = components[item.__component];
           if (compSchema) {
@@ -137,7 +155,8 @@ const extractTranslatableFields = (
               compSchema,
               item,
               [...path, fieldName, String(index)],
-              [...originalPath, fieldName, String(index)]
+              [...originalPath, fieldName, String(index)],
+              [...configSegments, fieldName, item.__component]
             );
           }
         });
@@ -145,7 +164,7 @@ const extractTranslatableFields = (
     });
   };
 
-  traverse(contentType, fields, [], []);
+  traverse(contentType, fields, [], [], []);
 
   return translatableFields;
 };
@@ -270,7 +289,15 @@ const llmService = ({ strapi }: { strapi: Core.Strapi }): LLMServiceType => ({
     try {
       const userConfig = await getUserConfig();
 
-      const translatableFields = extractTranslatableFields(contentType, fields, components);
+      const fieldConfig = await getFieldConfig(strapi);
+      const disabledKeys = getDisabledKeys(fieldConfig, contentType.uid);
+
+      const translatableFields = extractTranslatableFields(
+        contentType,
+        fields,
+        components,
+        disabledKeys
+      );
 
       // Split translatableFields in batches
       const batches: TranslatableField[][] = [];
@@ -298,8 +325,11 @@ const llmService = ({ strapi }: { strapi: Core.Strapi }): LLMServiceType => ({
       // Merge original content payload with translation
       const mergedContent = mergeTranslatedContent(fields, translatedData, translatableFields);
 
-      // Handle UID fields as they might have a relation base to another translated field
-      const uidFields = findUIDFields(contentType);
+      // Handle UID fields as they might have a relation base to another translated field.
+      // Skip UID fields turned off on the settings page.
+      const uidFields = findUIDFields(contentType).filter(
+        (uidField) => !disabledKeys.has(uidField.fieldName)
+      );
       const translatedUIDs = await generateUIDsForTranslatedFields(
         uidFields,
         translatedData,
@@ -307,11 +337,20 @@ const llmService = ({ strapi }: { strapi: Core.Strapi }): LLMServiceType => ({
         mergedContent
       );
 
+      // Only return fields that were actually enabled and translated (plus regenerated
+      // UIDs) so the admin replaces just those and leaves disabled fields untouched.
+      const touchedFields = new Set<string>(
+        translatableFields.map((field) => String(field.originalPath[0]))
+      );
+      Object.keys(translatedUIDs).forEach((fieldName) => touchedFields.add(fieldName));
+
+      const fullData: Record<string, any> = { ...mergedContent, ...translatedUIDs };
+      const data = Object.fromEntries(
+        Object.entries(fullData).filter(([fieldName]) => touchedFields.has(fieldName))
+      );
+
       return {
-        data: {
-          ...mergedContent,
-          ...translatedUIDs,
-        },
+        data,
         meta: {
           ok: true,
           status: 200,

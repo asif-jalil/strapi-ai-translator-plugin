@@ -1,4 +1,7 @@
+import type { Core } from '@strapi/strapi';
+
 import { GenerateRequestBody, PluginUserConfig, RequestContext, StrapiContext } from 'src/types';
+import { buildContentTypesTree, getFieldConfig, saveFieldConfig } from '../utils/field-config';
 
 const controllers = ({ strapi }: StrapiContext) => ({
   // Genertate translations
@@ -13,7 +16,7 @@ const controllers = ({ strapi }: StrapiContext) => ({
         });
 
       ctx.status = result.meta.status;
-      ctx.body = {};
+      ctx.body = result;
     } catch (error) {
       console.error('Error in generate controller:', error);
       ctx.status = 500;
@@ -56,6 +59,22 @@ const controllers = ({ strapi }: StrapiContext) => ({
     });
 
     ctx.body = (await pluginStore.get({ key: 'configuration' })) as PluginUserConfig;
+  },
+
+  // Get all localized content types + their translatable fields, and the saved field config
+  async getFieldSettings(ctx: RequestContext) {
+    const contentTypes = buildContentTypesTree(strapi as unknown as Core.Strapi);
+    const config = await getFieldConfig(strapi as unknown as Core.Strapi);
+    ctx.body = { contentTypes, config };
+  },
+
+  // Save the per-field translation configuration
+  async setFieldSettings(ctx: RequestContext) {
+    const { config } = ctx.request.body as {
+      config?: Record<string, Record<string, boolean>>;
+    };
+    const saved = await saveFieldConfig(strapi as unknown as Core.Strapi, config || {});
+    ctx.body = { config: saved };
   },
 });
 

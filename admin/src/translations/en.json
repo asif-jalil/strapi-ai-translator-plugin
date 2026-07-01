@@ -22,5 +22,14 @@
   "strapi-ai-translator.plugin.page.form.save": "Save changes",
   "strapi-ai-translator.plugin.page.form.system_prompt": "System Prompt",
   "strapi-ai-translator.plugin.page.form.system_prompt_hint": "This is (part) of the prompt that will be used to instruct the LLM. It should be clear and concise.",
-  "strapi-ai-translator.plugin.page.title": "Strapi AI Translator (Configuration)"
+  "strapi-ai-translator.plugin.page.title": "Strapi AI Translator (Configuration)",
+  "strapi-ai-translator.settings.section": "AI Translator",
+  "strapi-ai-translator.settings.fields.link": "Translatable Fields",
+  "strapi-ai-translator.settings.fields.title": "Translatable Fields",
+  "strapi-ai-translator.settings.fields.description": "Choose which fields the AI Translator should translate. Fields turned off are excluded from translation and left untouched in the response.",
+  "strapi-ai-translator.settings.fields.save": "Save",
+  "strapi-ai-translator.settings.fields.save_success": "Field settings saved",
+  "strapi-ai-translator.settings.fields.save_error": "Failed to save field settings",
+  "strapi-ai-translator.settings.fields.load_error": "Failed to load field settings",
+  "strapi-ai-translator.settings.fields.empty": "No localized content types found. Enable Internationalization on a content type with at least one translatable field to configure it here."
 }
