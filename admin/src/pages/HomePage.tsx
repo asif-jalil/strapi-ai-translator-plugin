@@ -18,7 +18,7 @@ import { useFetchClient } from '@strapi/strapi/admin';
 import { getTranslation } from '../utils/getTranslation';
 import { PLUGIN_ID } from '../../src/pluginId';
 import { PluginConfig } from '../../custom';
-import { PluginIcon } from '../../src/components/PluginIcon';
+import { BrandIcon } from '../../src/components/BrandIcon';
 import {
   DEFAULT_LLM_TEMPERATURE,
   DEFAULT_SYSTEM_PROMPT,
@@ -69,7 +69,7 @@ const HomePage = () => {
         background="neutral100"
       >
         <Flex data-strapi-header alignItems="center" gap={3} marginBottom={4}>
-          <PluginIcon width={42} height={42} />
+          <BrandIcon width={42} height={42} />
           <Typography variant="alpha" tag="h1" fontWeight="bold">
             {formatMessage({
               id: getTranslation('plugin.page.title'),
