@@ -1,1 +1,1 @@
-export const PLUGIN_ID = 'strapi-llm-translator';
+export const PLUGIN_ID = 'strapi-ai-translator';

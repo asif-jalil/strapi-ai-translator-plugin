@@ -4,16 +4,18 @@ const controllers = ({ strapi }: StrapiContext) => ({
   // Genertate translations
   async generate(ctx: RequestContext & { request: { body: GenerateRequestBody } }) {
     try {
+      console.log("logging request body", ctx.request.body);
+      
       const { fields, components, targetLanguage, contentType } = ctx.request.body;
-      const result = await strapi
-        .plugin('strapi-llm-translator')
-        .service('llm-service')
-        .generateWithLLM(contentType, fields, components, {
-          targetLanguage,
-        });
+      // const result = await strapi
+      //   .plugin('strapi-ai-translator')
+      //   .service('llm-service')
+      //   .generateWithLLM(contentType, fields, components, {
+      //     targetLanguage,
+      //   });
 
-      ctx.status = result.meta.status;
-      ctx.body = result;
+      // ctx.status = result.meta.status;
+      ctx.body = {};
     } catch (error) {
       console.error('Error in generate controller:', error);
       ctx.status = 500;
@@ -32,7 +34,7 @@ const controllers = ({ strapi }: StrapiContext) => ({
     const pluginStore = strapi.store({
       environment: strapi.config.environment,
       type: 'plugin',
-      name: 'strapi-llm-translator', // replace with your plugin name
+      name: 'strapi-ai-translator', // replace with your plugin name
     });
 
     const config = await pluginStore.get({ key: 'configuration' });
@@ -47,7 +49,7 @@ const controllers = ({ strapi }: StrapiContext) => ({
     const pluginStore = strapi.store({
       environment: strapi.config.environment,
       type: 'plugin',
-      name: 'strapi-llm-translator', // replace with your plugin name
+      name: 'strapi-ai-translator', // replace with your plugin name
     });
 
     await pluginStore.set({

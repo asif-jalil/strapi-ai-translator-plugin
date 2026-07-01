@@ -8,7 +8,7 @@ export default {
     llmAzureApiVersion: env('STRAPI_ADMIN_LLM_TRANSLATOR_AZURE_API_VERSION'),
   }),
   validator(config) {
-    const PLUGIN_NAME = 'Strapi LLM Translator';
+    const PLUGIN_NAME = 'Strapi AI Translator';
     console.info(`\n==== ${PLUGIN_NAME} Configuration Validation ====`);
 
     // Validate API Key

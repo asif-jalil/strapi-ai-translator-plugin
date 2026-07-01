@@ -70,7 +70,7 @@ const HomePage = () => {
           <Typography variant="alpha" tag="h1" fontWeight="bold">
             {formatMessage({
               id: getTranslation('plugin.page.title'),
-              defaultMessage: 'LLM Translator (Configuration)',
+              defaultMessage: 'Strapi AI Translator (Configuration)',
             })}
           </Typography>
         </Flex>
@@ -78,7 +78,7 @@ const HomePage = () => {
           {formatMessage({
             id: getTranslation('plugin.page.description'),
             defaultMessage:
-              'Configure the LLM Translator plugin settings. Be aware that Base Model, API Key and LLM Base URL need to be set as environment variables.',
+              'Configure the Strapi AI Translator plugin settings. Be aware that Base Model, API Key and LLM Base URL need to be set as environment variables.',
           })}
         </Typography>
       </Box>

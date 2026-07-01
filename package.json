@@ -65,11 +65,11 @@
   },
   "strapi": {
     "kind": "plugin",
-    "name": "strapi-llm-translator",
-    "displayName": "LLM Translator",
+    "name": "strapi-ai-translator",
+    "displayName": "Strapi AI Translator",
     "description": "AI-Powered Content Translation for Strapi"
   },
-  "name": "strapi-llm-translator",
+  "name": "strapi-ai-translator",
   "description": "AI-Powered Content Translation for Strapi",
   "license": "MIT",
   "author": "grenzbotin <franziska@vulpis.dev>",

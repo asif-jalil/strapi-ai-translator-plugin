@@ -1,8 +1,11 @@
-# <img alt="Strapi LLM Translator Icon" src="./docs/strapi-llm-translator-icon.png" width="50"> Strapi LLM Translator
+# <img alt="Strapi AI Translator Icon" src="./docs/strapi-llm-translator-icon.png" width="50"> Strapi AI Translator
 
 #### AI-Powered Content Translation for Strapi
 
-The Strapi LLM Translator plugin enhances your localization workflow by utilising LLMs to translate your content fields with a single click. Compatible with any OpenAI-compatible LLM, it preserves your original formatting while delivering fast, accurate results in seconds.
+> 🍴 **This is a fork of [Strapi LLM Translator](https://github.com/grenzbotin/strapi-llm-translator) by [grenzbotin](https://github.com/grenzbotin).**
+> It continues development under the name **Strapi AI Translator**. Full credit for the original plugin goes to the upstream author and contributors.
+
+The Strapi AI Translator plugin enhances your localization workflow by utilising LLMs to translate your content fields with a single click. Compatible with any OpenAI-compatible LLM, it preserves your original formatting while delivering fast, accurate results in seconds.
 
 ## 🚀 Key Features
 
@@ -15,7 +18,7 @@ The Strapi LLM Translator plugin enhances your localization workflow by utilisin
 
 ---
 
-<img alt="strapi-llm-translator" style="border-radius:5px" src="./docs/strapi-llm-translator.gif" width="640">
+<img alt="Strapi AI Translator" style="border-radius:5px" src="./docs/strapi-llm-translator.gif" width="640">
 
 ---
 
@@ -41,7 +44,7 @@ The Strapi LLM Translator plugin enhances your localization workflow by utilisin
 1. Install the plugin in your Strapi project:
 
 ```bash
-npm install strapi-llm-translator
+npm install strapi-ai-translator
 ```
 
 2. Configure environment variables:
@@ -66,11 +69,11 @@ STRAPI_ADMIN_LLM_TRANSLATOR_LLM_MODEL=
 npm run build
 ```
 
-After installation, customize the translation behavior through the LLM Translator configuration page:
+After installation, customize the translation behavior through the Strapi AI Translator configuration page:
 
 ---
 
-<img alt="Strapi LLM Translator Configuration screen" style="border-radius:5px" src="./docs/strapi-llm-translator-configuration.png" width="640">
+<img alt="Strapi AI Translator Configuration screen" style="border-radius:5px" src="./docs/strapi-llm-translator-configuration.png" width="640">
 
 ---
 
@@ -79,12 +82,16 @@ After installation, customize the translation behavior through the LLM Translato
 To contribute to the plugin development:
 
 1. Navigate to your Strapi project
-2. Add and link the plugin: `npx yalc add strapi-llm-translator && npx yalc link strapi-llm-translator && npm install`
+2. Add and link the plugin: `npx yalc add strapi-ai-translator && npx yalc link strapi-ai-translator && npm install`
 3. Start your Strapi project
 4. In a separate terminal, watch the plugin for changes:
    `npm run watch:link`
 
-## Contributors ✨
+## 🙏 Credits
+
+This project is a fork of **[Strapi LLM Translator](https://github.com/grenzbotin/strapi-llm-translator)** by [grenzbotin](https://github.com/grenzbotin) – [vulpis.dev](https://vulpis.dev). All credit for the original design and implementation belongs to the upstream author and contributors below.
+
+### Original Contributors ✨
 
 Thanks goes to these wonderful people:
 
@@ -92,7 +99,7 @@ Thanks goes to these wonderful people:
 - [asiegrist](https://github.com/asiegrist) (Azure OpenAI Support)
 - [DrTimmi](https://github.com/DrTimmi) (Support for nested components, dynamic zones, rich-text fields, and robust JSON parsing)
 
-## Author
+### Original Author
 
 - [grenzbotin](https://github.com/grenzbotin) – [vulpis.dev](https://vulpis.dev)
 

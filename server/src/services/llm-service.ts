@@ -355,7 +355,7 @@ const getUserConfig = async (): Promise<PluginUserConfig> => {
   const pluginStore = strapi.store({
     environment: strapi.config.environment,
     type: 'plugin',
-    name: 'strapi-llm-translator',
+    name: 'strapi-ai-translator',
   });
 
   const config = (await pluginStore.get({ key: 'configuration' })) as PluginUserConfig;
