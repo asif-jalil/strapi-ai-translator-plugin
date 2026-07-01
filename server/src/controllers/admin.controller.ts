@@ -3,18 +3,16 @@ import { GenerateRequestBody, PluginUserConfig, RequestContext, StrapiContext } 
 const controllers = ({ strapi }: StrapiContext) => ({
   // Genertate translations
   async generate(ctx: RequestContext & { request: { body: GenerateRequestBody } }) {
-    try {
-      console.log("logging request body", ctx.request.body);
-      
+    try {      
       const { fields, components, targetLanguage, contentType } = ctx.request.body;
-      // const result = await strapi
-      //   .plugin('strapi-ai-translator')
-      //   .service('llm-service')
-      //   .generateWithLLM(contentType, fields, components, {
-      //     targetLanguage,
-      //   });
+      const result = await strapi
+        .plugin('strapi-ai-translator')
+        .service('llm-service')
+        .generateWithLLM(contentType, fields, components, {
+          targetLanguage,
+        });
 
-      // ctx.status = result.meta.status;
+      ctx.status = result.meta.status;
       ctx.body = {};
     } catch (error) {
       console.error('Error in generate controller:', error);
